@@ -7,7 +7,6 @@ This is Simple Chrome Extension Assistent for Plant vs Undead Farm Game
 
 Download the code and go to your chrome extension settings `chrome://extensions/` enable the `Develop mode` and select `Load Unpacked` 
 
-![image](https://user-images.githubusercontent.com/7622553/138529337-19402ad4-c542-47b5-bf12-827b2636ef16.png)
 ![image](https://user-images.githubusercontent.com/7622553/138529176-0335ef5c-93c5-4527-8d63-0d6df0d5c986.png))
 
 Then select the unziped root folder of this repository you just downloaded and refresh the pvu page `https://marketplace.plantvsundead.com/#/marketplace/plant`
@@ -24,5 +23,6 @@ Thanks!
 
 If you wish you can also donate something to my wallet (`BSC`)
 
-0x0F50CFBecbbf14d99d99Ae2003e56c45071d2cc6
 ![frame](https://user-images.githubusercontent.com/7622553/138530161-3fb121b2-1b16-41dc-ab9f-10262deeaf8f.png)
+
+`0x0F50CFBecbbf14d99d99Ae2003e56c45071d2cc6`
