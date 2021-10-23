@@ -1,4 +1,4 @@
-# Whats App Bot
+# PVU Assistent
 
 This is Simple Chrome Extension Assistent for Plant vs Undead Farm Game
 ![extension_buy_fast](https://user-images.githubusercontent.com/7622553/138528866-23066ffe-9731-4ee5-9fd4-015ea0ddc1bb.png)
