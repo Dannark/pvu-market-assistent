@@ -1,66 +1,49 @@
 
+const nextButton = `div.box.tw-cursor-pointer`
+
+var keepMonitoring = false
+
+const delay = ms => new Promise(res => setTimeout(res, ms));
+
+const intervalToRefreshPage = setInterval(() => { 
+	monitoringFowardAndBackwardsStrategy(); 
+}, 6000);
 
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
-
-	console.log("Clicked at the extension: ", request);
-
-    findElements()
+	if( request.message === "monitoring_action" ) {
+		keepMonitoring = !keepMonitoring
+	}
   }
 );
 
-// function sendToGroup(msgToSend, toGroup){
-// 	var myVar;
-// 	$('.'+userObject).each(function(){
+async function monitoringFowardAndBackwardsStrategy(){
+	if (keepMonitoring){
+		var nextButtonDiv = $(nextButton)[1]
 		
-// 		if($(this).find('.'+userTitle).attr('title') != undefined && $(this).find('.'+userMsg).attr('title') != undefined){
+		if(nextButtonDiv != undefined){
+			triggerMouseEvent(nextButtonDiv, "mousedown");
 
-// 			var myTitle = ""+$(this).find('.'+userTitle).attr('title').toString().trim();
-// 			var myMsg = ""+$(this).find('.'+userMsg).attr('title').toString().trim();
-
-// 			//lastAnsweredUsers.push({name:myTitle, value:myMsg});
-			
-// 			if(myTitle == toGroup){
-// 				myVar = $(this);
-// 			}
-// 		}
-// 		else{
-// 			console.log("erro ao encontrar classe do usuario title/msg");
-// 		}
-// 	});
-
-// 	var elementoClick = myVar.find("."+userContainerClick);
-// 	triggerMouseEvent(elementoClick, "mousedown");
-	
-// 	sendMsg(msgToSend, sendButton);
-
-// }
-
-
+			await delay(5000);
+			var prevButtonDiv = $(nextButton)[0]
+			triggerMouseEvent(prevButtonDiv, "mousedown");
+		}
+	}
+}
 
 function triggerMouseEvent(node, eventType) {
     var event = document.createEvent('MouseEvents');
 	event.initEvent(eventType, true, true);
 	
-	console.log('simulando click',node, eventType)
 	try {
-		node.dispatchEvent(event);
+		// node.dispatchEvent(event);
+		node.click()
 	}catch (e) {
 		console.log('> Simulating Click Error: User Class Container not Found.',e)
 	}
 	
 }
 
-function setExtensionId(){
-	var myToken = chrome.runtime.id;
-	document.cookie = "extensionID="+myToken;
-}
-
-function sendMsg(msg, sendButton){
-	// this block will fire in future because wp can take some tome to download page content
-	setTimeout(function() { sendMsgDelay(msg, sendButton); }, 1500);
-	return msg.replaceAll("*","");
-}
 
 function sendMsgDelay(msg, sendButton){
 	var event = new Event('input', {bubbles: true});

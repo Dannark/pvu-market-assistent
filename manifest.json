@@ -1,19 +1,19 @@
 {
-    "manifest_version": 2,
+    "manifest_version": 3,
     "version": "0.0.1",
     "name": "PVU Marketplace Assistent",
     "description": "Simple Assistent for Plant vs Undead Game",
-    "author": "Daniel Queiroz de Pontes",
-
-    "browser_action": {
-   	 "default_icon": "icon.png"
+    "author": "Dannark",
+    "background": {
+      "service_worker": "background.js"
     },
 
-    "web_accessible_resources" : [
-      "images/*.png"
-    ],
+    "action": {
+      "default_popup": "popup.html",
+   	  "default_icon": "icon.png"
+    },
 
-    "permissions": [ "activeTab", "declarativeContent", "storage", "tabs", "alarms", "debugger", "https://*.plantvsundead.com/" ],
+    "permissions": [ "activeTab", "declarativeContent", "storage", "tabs", "scripting", "alarms", "debugger"],
 
     "content_scripts": [
       {
@@ -22,12 +22,7 @@
         ],
         "js": ["jquery-2.1.3.min.js", "on_load_page_script.js", "content_injection.js"]
       }
-    ],
-
-    "background": {
-      "persistent": true,
-      "scripts": ["background.js"]
-    }
-
+    ]
+  
 }
 

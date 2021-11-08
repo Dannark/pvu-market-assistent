@@ -10,7 +10,7 @@ colors = ['transparent', 'transparent', 'transparent', 'transparent', 'transpare
 
 console.log("PVU Marketplace Assistent was injected successfuly")
 
-const interval = setInterval(() => { 
+const intervalToUpdatePlants = setInterval(() => { 
     loadScripts(); 
 }, 400);
 
@@ -19,7 +19,7 @@ function loadScripts(){
     var containerInventory = $(myPlantsListItems).children()
 	
     if(containerMarket.length > 0){
-        // clearInterval(interval)
+        // clearInterval(intervalToUpdatePlants)
         show5ElementsPerRow()
         showLEPerHourOnMarket()
     }
@@ -34,14 +34,14 @@ function loadScripts(){
 function show5ElementsPerRow(){
     var container = $(containerListItems)
     container.removeClass("xl:tw-grid-cols-4").addClass("xl:tw-grid-cols-5")
-    console.log("Exibindo 5 plantas ao invês de 4")
 }
 
 function showLEPerHourOnMarket(){
     var itemListOnMarket = $(itemContainerClass)
 	
 	itemListOnMarket.each(function(){
-		var lePointsBox = $(this).children('a').find(itemBottomEnd).children('div').children('div.le.tw-text-center')
+        var itemContainer = $(this).children('a').find(itemBottomEnd).children('div')
+		var lePointsBox = itemContainer.children('div.le.tw-text-center')
 		var lePoints = lePointsBox[0]
 
         lePointsBox.find('.LEPH').remove()
@@ -51,7 +51,7 @@ function showLEPerHourOnMarket(){
             .replace('LE:', '')
             .replace('Hour', '').trim()
         
-        var resultPoint = parseInt(eval(onlyText))
+        var resultPoint = parseInt(evaluation(onlyText))
         
         // add new element
         var element = $("<span>")
@@ -61,7 +61,30 @@ function showLEPerHourOnMarket(){
         lePointsBox.prepend(element)
 
         // lePointsContainer.innerHTML += `<span>(LE: ${resultPoint}/h)</span>`
+
+        showLEPriceRate(itemContainer, resultPoint)
 	});
+}
+
+function showLEPriceRate(itemContainer, resultPoint){
+	
+	//var priceBox = itemContainer[1].children[0]// .children('div.tw-flex.tw-justify-end')//.children('p')
+	var priceContainer = itemContainer.eq(1)//.children('tw-ml-4.tw-col-end-7.tw-col-span-3')
+	var priceBox = itemContainer.children('div.tw-flex')
+    var price = priceBox.children('p')[0]
+
+    priceContainer.find('.PRICE').remove()
+    console.log(priceContainer)
+
+    var priceOnlyText = price.textContent.trim()
+    var costVsBenefit = resultPoint / parseInt(priceOnlyText)
+    
+    // add new element
+    var element = $("<span>")
+        .addClass('PRICE')
+        // .css({background: getColor(12), padding: "1px 4px", margin:"8px", "border-radius": "10px"})
+        .html(`<span style="color:white;font-size:11px;float:right">CB: <b>${costVsBenefit.toFixed(2)}</b></span><br>`);
+    priceContainer.prepend(element)
 }
 
 function showLEPerHourOnInvetory(){
@@ -77,16 +100,23 @@ function showLEPerHourOnInvetory(){
             .replace('LE:', '')
             .replace('hour', '').trim()
         
-        var resultPoint = parseInt(eval(onlyText))
+        var resultPoint = parseInt(evaluation(onlyText))
         
         console.log(resultPoint)
         // add new element
         var element = $("<span>")
             .addClass('LEPH')
             .css({background: getColor(resultPoint), padding: "1px 5px", "line-height": "2.5", "border-radius": "10px"})
-            .html(`<b><span style="color:white">${resultPoint}</span></b> <span style="color:lightgray">LE/h:</span><br>`);
+            .html(`<b><span style="color:white">${resultPoint}</span></b> <span style="color:lightgray">LE/h</span><br>`);
         lePointsBox.prepend(element)
     })
+}
+
+function evaluation(s){
+    let i = s.indexOf('/')
+    let partOne = parseInt(s.slice(0, i).trim())
+    let partTwo = parseInt(s.slice(i+1, s.length).trim())
+    return partOne / partTwo
 }
 
 function getColor(resultPoint){

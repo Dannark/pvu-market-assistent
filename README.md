@@ -1,7 +1,14 @@
 # PVU Assistent
 
 This is Simple Chrome Extension Assistent for Plant vs Undead Farm Game
-![extension_buy_fast](https://user-images.githubusercontent.com/7622553/138528866-23066ffe-9731-4ee5-9fd4-015ea0ddc1bb.png)
+![image](https://user-images.githubusercontent.com/7622553/140828602-5057c59a-9613-4423-a70b-120060ddf49a.png)
+
+### Features:
+[x] Added LE / Hour
+[x] Added CB (Cost vs Benefit Rate) this is a division between the `LE/h` divided by the `Price`. The higher this number, the better
+[ ] Auto water the plants
+[ ] Shows what plants did you get from the seed
+[ ] Price Alerts and monitoring system
 
 ### Instructions
 

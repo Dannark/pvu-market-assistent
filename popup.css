@@ -1,0 +1,35 @@
+body{
+  width: 350px;
+  height: auto;
+  margin: 0px;
+  padding: 0px;
+}
+
+.header{
+  background-color: darkslategrey;
+  color: azure;
+  text-align: center;
+  font-size: 18px;
+  font-weight: 600;
+  padding: 10px;
+}
+
+
+section{
+  margin: 10px;
+}
+
+button {
+  outline: none;
+  margin: 10px;
+  border: none;
+  border-radius: 3px;
+  padding: 6px;
+  background-color: #3aa757;
+  color: azure;
+}
+
+button.current {
+  box-shadow: 0 0 0 2px white,
+              0 0 0 4px black;
+}
